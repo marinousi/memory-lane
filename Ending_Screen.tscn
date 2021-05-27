@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Font-On-A-Stick.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Label_Memory_Lane.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Ending_Screen.gd" type="Script" id=3]
+[ext_resource path="res://Exit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Cursor.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 42
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 246.859, 20.941 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 246.859, 18.5003 )
+
+[node name="Ending_Screen" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.839216, 0.945098, 0.984314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" parent="CanvasLayer" instance=ExtResource( 5 )]
+position = Vector2( 4.23785, 79.4597 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -265.5
+margin_top = -35.0
+margin_right = 265.5
+margin_bottom = 61.0
+mouse_filter = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play_Again" type="Button" parent="CanvasLayer/VBoxContainer"]
+margin_right = 531.0
+margin_bottom = 46.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.141176, 0.564706, 0.937255, 1 )
+text = "Jogar Novamente"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jogardnv" type="Area2D" parent="CanvasLayer/VBoxContainer/Play_Again"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Play_Again/Jogardnv"]
+position = Vector2( 266.699, 23.973 )
+shape = SubResource( 2 )
+
+[node name="Exit" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 4 )]
+
+[node name="sair" type="Area2D" parent="CanvasLayer/VBoxContainer/Exit"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Exit/sair"]
+position = Vector2( 266.699, 21.7255 )
+shape = SubResource( 3 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -215.0
+margin_top = -160.0
+margin_right = 316.0
+margin_bottom = -49.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" parent="CanvasLayer/VBoxContainer2" instance=ExtResource( 2 )]
+margin_top = 9.0
+margin_right = 432.0
+margin_bottom = 101.0
+text = "Você Ganhou!"
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Play_Again" to="." method="_on_Play_Again_pressed"]
+[connection signal="area_entered" from="CanvasLayer/VBoxContainer/Play_Again/Jogardnv" to="." method="_on_Jogardnv_area_entered"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="area_entered" from="CanvasLayer/VBoxContainer/Exit/sair" to="." method="_on_sair_area_entered"]
